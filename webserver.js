@@ -15,6 +15,16 @@ database.connect(error => {
 
 webserver.use(express.static(__dirname + "/client" + "/public"));
 
+//===============================================
+//=============Endpoints start here=============
+//=============================================
+
+require("./routes")(webserver, mysql, database);
+
+webserver.get("/test", (req, res) => {
+	res.sendFile("/Users/Xtina/Desktop/LFZ/student-grade-table/test.html");
+});
+
 webserver.listen(9000, () => {
 	console.log("webserver listening on port 9000");
 });

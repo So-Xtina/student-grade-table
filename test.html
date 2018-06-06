@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <title>Testing Endpoint</title>
+</head>
+
+<body>
+
+    <button class="get">CLICK ME FOR DATA!</button>
+
+</body>
+
+<script>
+
+    $(".get").click(makeAjaxCall);
+
+    function makeAjaxCall() {
+        $.ajax({
+            url: './api/get_student_data',
+            method: 'get',
+            dataType: 'json',
+            success: (data) => {
+                console.log('ajax call successful');
+                console.log('data: ', data);
+            },
+            error: (error) => {
+                console.log('ajax was successful');
+                console.log('errors: ', error);
+            }
+        });
+    }
+
+
+</script>
+
+</html>
