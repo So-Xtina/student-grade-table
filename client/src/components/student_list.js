@@ -3,8 +3,16 @@ import { connect } from "react-redux";
 import { getStudentList } from "../actions";
 
 class StudentList extends Component {
+	constructor(props) {
+		super(props);
+	}
+
+	getServerData() {
+		this.props.getStudentList();
+	}
+
 	render() {
-		console.log("student list:", this.props.getStudentList());
+		// console.log("student list:", this.props.getStudentList());
 		return (
 			<div className="student-list-container col-xs-12 col-sm-9">
 				<table className="student-list page-header media-heading table">

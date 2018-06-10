@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getStudentList } from "../actions";
 
 class AddStudent extends Component {
 	render() {
@@ -48,15 +50,24 @@ class AddStudent extends Component {
 				<button type="button" className="btn btn-success btn-lg addBtn">
 					<i className="fa fa-spinner fa-pulse hide addSpinner" style={style} />Add
 				</button>
-				<button type="button" className="btn btn-default btn-lg cancelBtn">
+				<button type="button" className="btn btn-danger btn-lg cancelBtn">
 					Cancel
 				</button>
 				<button type="button" className="btn btn-primary btn-lg dataServerBtn">
-					<i className="fa fa-spinner fa-pulse hide dataSpinner" style={style} />Get Data From Server
+					<i className="fa fa-spinner fa-pulse hide dataSpinner" style={style} />Get Data
 				</button>
 			</div>
 		);
 	}
 }
 
-export default AddStudent;
+function mapStateToProps(state) {
+	return {
+		studentList: state.studentListReducer.studentList
+	};
+}
+
+export default connect(
+	mapStateToProps,
+	{ getStudentList }
+)(AddStudent);

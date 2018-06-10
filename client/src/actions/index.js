@@ -1,5 +1,6 @@
 import types from "./types";
-import dummyData from "../dummyData";
+import axios from "axios";
+//import dummyData from "../dummy_data";
 
 export function incrementCount(count) {
 	return {
@@ -8,13 +9,12 @@ export function incrementCount(count) {
 	};
 }
 
-//export async function getStudentList()
-export function getStudentList() {
+export async function getStudentList() {
 	//axios call can go here
-	//const response = await axios.get("url", dataToSend);
+	const response = await axios.get("/api/get_student_data");
 
 	return {
 		type: types.GET_STUDENT_LIST,
-		payload: dummyData
+		payload: response
 	};
 }
