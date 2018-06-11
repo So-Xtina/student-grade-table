@@ -3,6 +3,16 @@ import { connect } from "react-redux";
 import { getStudentList } from "../actions";
 
 class AddStudent extends Component {
+	constructor(props) {
+		super(props);
+
+		this.getServerData = this.getServerData.bind(this);
+	}
+
+	async getServerData() {
+		await this.props.getStudentList();
+	}
+
 	render() {
 		const style = {
 			fontSize: "24px"
@@ -53,7 +63,11 @@ class AddStudent extends Component {
 				<button type="button" className="btn btn-danger btn-lg cancelBtn">
 					Cancel
 				</button>
-				<button type="button" className="btn btn-primary btn-lg dataServerBtn">
+				<button
+					onClick={() => this.getServerData()}
+					type="button"
+					className="btn btn-primary btn-lg dataServerBtn"
+				>
 					<i className="fa fa-spinner fa-pulse hide dataSpinner" style={style} />Get Data
 				</button>
 			</div>

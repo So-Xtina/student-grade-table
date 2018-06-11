@@ -9,7 +9,7 @@ export default (state = DEFAULT_STATE, action) => {
 		case types.GET_STUDENT_LIST:
 			return {
 				...state,
-				studentList: action.payload
+				studentList: action.payload.data.data
 			};
 		default:
 			return state;
