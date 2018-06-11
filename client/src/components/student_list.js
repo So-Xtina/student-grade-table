@@ -5,14 +5,32 @@ import { getStudentList } from "../actions";
 class StudentList extends Component {
 	constructor(props) {
 		super(props);
+
+		//calls the function when the page loads;
+		// this.getServerData();
 	}
 
-	getServerData() {
-		this.props.getStudentList();
-	}
+	//If you want the data to automatically populate in the browser on open;
+	// async getServerData() {
+	// 	await this.props.getStudentList();
+	// }
 
 	render() {
-		// console.log("student list:", this.props.getStudentList());
+		console.log(this.props);
+		const { studentList } = this.props;
+
+		const students = studentList.map((student, index) => {
+			return (
+				<tr key={index}>
+					<td>
+						{student.first_name} {student.last_name}
+					</td>
+					<td>{student.class_name}</td>
+					<td>{student.grade_value}</td>
+				</tr>
+			);
+		});
+
 		return (
 			<div className="student-list-container col-xs-12 col-sm-9">
 				<table className="student-list page-header media-heading table">
@@ -24,7 +42,7 @@ class StudentList extends Component {
 							<th>Operations</th>
 						</tr>
 					</thead>
-					<tbody />
+					<tbody>{students}</tbody>
 				</table>
 			</div>
 		);

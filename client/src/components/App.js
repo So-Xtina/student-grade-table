@@ -11,8 +11,8 @@ class App extends Component {
 			<div className="App col-xs-12 col-md-12">
 				<Header />
 				<div className="row">
-					<StudentList />
 					<AddStudent />
+					<StudentList />
 				</div>
 			</div>
 		);

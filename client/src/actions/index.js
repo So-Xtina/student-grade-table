@@ -9,9 +9,9 @@ export function incrementCount(count) {
 	};
 }
 
-export async function getStudentList() {
+export function getStudentList() {
 	//axios call can go here
-	const response = await axios.get("/api/get_student_data");
+	const response = axios.get("/api/get_student_data");
 
 	return {
 		type: types.GET_STUDENT_LIST,

@@ -15,7 +15,8 @@ module.exports = (webserver, mysql, database) => {
 		SELECT 
 		users.first_name,
 		users.last_name,
-		classes.grade_value
+		classes.grade_value,
+		classes.class_name
 		FROM classes
 		JOIN users
 			ON classes.student_id = users.id
