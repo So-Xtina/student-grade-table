@@ -18,3 +18,31 @@ export function getStudentList() {
 		payload: response
 	};
 }
+
+export function addStudent(student) {
+	const response = axios.post("/api/add_student", student);
+
+	return {
+		type: types.ADD_STUDENT,
+		payload: response
+	};
+}
+
+export function updateInput(name, value) {
+	return {
+		type: types.UPDATE_INPUT,
+		payload: {
+			name,
+			value
+		}
+	};
+}
+
+export function clearInput(name) {
+	return {
+		type: types.CLEAR_INPUT,
+		payload: name
+	};
+}
+
+export function deleteStudent(id) {}

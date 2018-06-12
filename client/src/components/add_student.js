@@ -1,19 +1,56 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getStudentList } from "../actions";
+import { getStudentList, addStudent, updateInput, clearInput } from "../actions";
 
 class AddStudent extends Component {
 	constructor(props) {
 		super(props);
 
+		this.student = {
+			student_name: "",
+			class_name: "",
+			grade_value: ""
+		};
+
 		this.getServerData = this.getServerData.bind(this);
+		this.handleAddItem = this.handleAddItem.bind(this);
+		this.updateInput = this.updateInput.bind(this);
+		this.clearInput = this.clearInput.bind(this);
 	}
 
 	async getServerData() {
 		await this.props.getStudentList();
 	}
 
+	async handleAddItem() {
+		const { student_name, class_name, grade_value } = this.props;
+
+		this.student = {
+			student_name,
+			class_name,
+			grade_value
+		};
+
+		await this.props.addStudent(this.student);
+
+		this.clearInput();
+	}
+
+	updateInput(event) {
+		const { name, value } = event.target;
+
+		this.props.updateInput(name, value);
+	}
+
+	clearInput() {
+		for (let key in this.student) {
+			this.props.clearInput(key);
+		}
+	}
+
 	render() {
+		const { student_name, class_name, grade_value } = this.props;
+
 		const style = {
 			fontSize: "24px"
 		};
@@ -26,9 +63,11 @@ class AddStudent extends Component {
 						<span className="glyphicon glyphicon-user" />
 					</span>
 					<input
+						onChange={this.updateInput}
+						value={student_name}
 						type="text"
 						className="form-control"
-						name="studentName"
+						name="student_name"
 						id="studentName"
 						placeholder="Student Name"
 					/>
@@ -38,9 +77,11 @@ class AddStudent extends Component {
 						<span className="glyphicon glyphicon-list-alt" />
 					</span>
 					<input
+						onChange={this.updateInput}
+						value={class_name}
 						type="text"
 						className="form-control"
-						name="course"
+						name="class_name"
 						id="course"
 						placeholder="Student Course"
 					/>
@@ -50,17 +91,19 @@ class AddStudent extends Component {
 						<span className="glyphicon glyphicon-education" />
 					</span>
 					<input
+						onChange={this.updateInput}
+						value={grade_value}
 						type="text"
 						className="form-control"
-						name="studentGrade"
+						name="grade_value"
 						id="studentGrade"
 						placeholder="Student Grade"
 					/>
 				</div>
-				<button type="button" className="btn btn-success btn-lg addBtn">
+				<button onClick={() => this.handleAddItem()} type="button" className="btn btn-success btn-lg addBtn">
 					<i className="fa fa-spinner fa-pulse hide addSpinner" style={style} />Add
 				</button>
-				<button type="button" className="btn btn-danger btn-lg cancelBtn">
+				<button onClick={() => this.clearInput()} type="button" className="btn btn-danger btn-lg cancelBtn">
 					Cancel
 				</button>
 				<button
@@ -77,11 +120,14 @@ class AddStudent extends Component {
 
 function mapStateToProps(state) {
 	return {
-		studentList: state.studentListReducer.studentList
+		studentList: state.studentListReducer.studentList,
+		student_name: state.inputReducer.student_name,
+		grade_value: state.inputReducer.grade_value,
+		class_name: state.inputReducer.class_name
 	};
 }
 
 export default connect(
 	mapStateToProps,
-	{ getStudentList }
+	{ getStudentList, addStudent, updateInput, clearInput }
 )(AddStudent);

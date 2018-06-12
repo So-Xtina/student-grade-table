@@ -7,10 +7,17 @@ const DEFAULT_STATE = {
 export default (state = DEFAULT_STATE, action) => {
 	switch (action.type) {
 		case types.GET_STUDENT_LIST:
-			return {
-				...state,
-				studentList: action.payload.data.data
-			};
+			if (action.payload.data.success) {
+				return {
+					...state,
+					studentList: action.payload.data.data
+				};
+			} else {
+				return {
+					...state,
+					errors: [...state.errros, action.payload.data.errors]
+				};
+			}
 		default:
 			return state;
 	}
