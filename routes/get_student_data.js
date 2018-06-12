@@ -7,26 +7,22 @@ module.exports = (webserver, mysql, database) => {
 		};
 
 		//assume class id of biology
-		let class_name = "biology";
+		// let class_name = "biology";
 
 		//let class_name = req.body.class_name;
 
 		let query = `
 		SELECT 
-		users.first_name,
-		users.last_name,
-		classes.grade_value,
-		classes.class_name
-		FROM classes
-		JOIN users
-			ON classes.student_id = users.id
-		WHERE class_name = ?`;
+		class_name,
+		student_name,
+		grade_value
+		FROM grades`;
 
-		let inserts = [class_name];
+		// let inserts = [class_name];
 
-		let mysqlQuery = mysql.format(query, inserts);
+		// let mysqlQuery = mysql.format(query, inserts);
 
-		database.query(mysqlQuery, (err, data, fields) => {
+		database.query(query, (err, data, fields) => {
 			if (!err) {
 				output.success = true;
 				output.data = data;
