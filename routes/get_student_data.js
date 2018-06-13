@@ -12,7 +12,8 @@ module.exports = (webserver, mysql, database) => {
 		//let class_name = req.body.class_name;
 
 		let query = `
-		SELECT 
+		SELECT
+		id,
 		class_name,
 		student_name,
 		grade_value

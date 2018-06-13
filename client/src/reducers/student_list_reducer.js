@@ -15,7 +15,7 @@ export default (state = DEFAULT_STATE, action) => {
 			} else {
 				return {
 					...state,
-					errors: [...state.errros, action.payload.data.errors]
+					errors: [...state.errors, action.payload.data.errors]
 				};
 			}
 		default:

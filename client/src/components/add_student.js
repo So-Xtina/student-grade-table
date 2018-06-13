@@ -33,6 +33,8 @@ class AddStudent extends Component {
 
 		await this.props.addStudent(this.student);
 
+		this.getServerData();
+
 		this.clearInput();
 	}
 
@@ -100,16 +102,16 @@ class AddStudent extends Component {
 						placeholder="Student Grade"
 					/>
 				</div>
-				<button onClick={() => this.handleAddItem()} type="button" className="btn btn-success btn-lg addBtn">
+				<button onClick={() => this.handleAddItem()} type="button" className="btn btn-success btn-md addBtn">
 					<i className="fa fa-spinner fa-pulse hide addSpinner" style={style} />Add
 				</button>
-				<button onClick={() => this.clearInput()} type="button" className="btn btn-danger btn-lg cancelBtn">
+				<button onClick={() => this.clearInput()} type="button" className="btn btn-danger btn-md cancelBtn">
 					Cancel
 				</button>
 				<button
 					onClick={() => this.getServerData()}
 					type="button"
-					className="btn btn-primary btn-lg dataServerBtn"
+					className="btn btn-primary btn-md dataServerBtn"
 				>
 					<i className="fa fa-spinner fa-pulse hide dataSpinner" style={style} />Get Data
 				</button>

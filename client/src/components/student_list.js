@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getStudentList } from "../actions";
+import { getStudentList, deleteStudent } from "../actions";
 
 class StudentList extends Component {
 	constructor(props) {
@@ -8,11 +8,17 @@ class StudentList extends Component {
 
 		//calls the function when the page loads;
 		this.getServerData();
+		this.handleDeleteItem = this.handleDeleteItem.bind(this);
 	}
 
-	//If you want the data to automatically populate in the browser on open;
 	async getServerData() {
 		await this.props.getStudentList();
+	}
+
+	async handleDeleteItem(id) {
+		this.props.deleteStudent(id);
+
+		await this.getServerData();
 	}
 
 	render() {
@@ -25,6 +31,13 @@ class StudentList extends Component {
 					<td>{student.student_name}</td>
 					<td>{student.class_name}</td>
 					<td>{student.grade_value}</td>
+					<td
+						onClick={() => this.handleDeleteItem(student.id)}
+						type="button"
+						className="btn btn-danger btn-sm cancelBtn"
+					>
+						Delete
+					</td>
 				</tr>
 			);
 		});
@@ -55,5 +68,5 @@ function mapStateToProps(state) {
 
 export default connect(
 	mapStateToProps,
-	{ getStudentList }
+	{ getStudentList, deleteStudent }
 )(StudentList);
