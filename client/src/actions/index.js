@@ -10,7 +10,6 @@ export function incrementCount(count) {
 }
 
 export function getStudentList() {
-	//axios call can go here
 	const response = axios.get("/api/get_student_data");
 
 	return {
@@ -45,4 +44,15 @@ export function clearInput(name) {
 	};
 }
 
-export function deleteStudent(id) {}
+export function deleteStudent(id) {
+	const response = axios.delete("/api/delete_student", {
+		params: {
+			id
+		}
+	});
+
+	return {
+		type: types.DELETE_STUDENT,
+		payload: response
+	};
+}
