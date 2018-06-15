@@ -56,3 +56,13 @@ export function deleteStudent(id) {
 		payload: response
 	};
 }
+
+export function editStudentData(student) {
+
+	const response = axios.put("/api/edit_student_data", {student});
+
+	return {
+		type: types.EDIT_STUDENT,
+		payload: response
+	};
+}

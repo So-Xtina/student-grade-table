@@ -1,4 +1,4 @@
-.App {
+/* .App {
 	text-align: center;
 }
 
@@ -29,11 +29,40 @@
 	to {
 		transform: rotate(360deg);
 	}
-}
+} */
 
 /*********ADDITIONAL STYLING***********/
 
 /*************Error Modal**************/
 .hide {
 	display: none;
+}
+
+/*************Buttons*****************/
+.cancelBtn,
+.dataServerBtn,
+.addBtn {
+	margin: 1.5%;
+}
+
+.editBtn,
+.deleteBtn {
+	margin: 2%;
+}
+
+/*************Edit Modal**************/
+.editModal {
+	position: absolute;
+	height: 50%;
+	width: 50%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1050;
+	display: block;
+	outline: 0;
+}
+
+.form-control::placeholder {
+	text-align: center;
 }
