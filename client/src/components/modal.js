@@ -3,20 +3,20 @@ import React, { Component } from "react";
 class Modal extends Component {
 	render() {
 		return (
-			<div id="errorModal" class="modal fade" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">
+			<div id="errorModal" className="modal fade" role="dialog">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<button type="button" className="close" data-dismiss="modal">
 								&times;
 							</button>
-							<h4 class="modal-title">Error Message</h4>
+							<h4 className="modal-title">Error Message</h4>
 						</div>
-						<div class="modal-body">
+						<div className="modal-body">
 							<p>Data Error!</p>
 						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">
+						<div className="modal-footer">
+							<button type="button" className="btn btn-default" data-dismiss="modal">
 								Close
 							</button>
 						</div>
