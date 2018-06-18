@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getStudentList, deleteStudent, editStudentData, clearInput } from "../actions";
+import { getStudentList, deleteStudent, editStudentData, clearInput, gradeAverage } from "../actions";
 import EditStudent from "./edit_student";
 
 class StudentList extends Component {
@@ -22,6 +22,10 @@ class StudentList extends Component {
 
 	async getServerData() {
 		await this.props.getStudentList();
+
+		const { studentList } = this.props;
+
+		this.props.gradeAverage(studentList);
 	}
 
 	async handleDeleteStudent(id) {
@@ -45,12 +49,12 @@ class StudentList extends Component {
 		student[name] = value;
 
 		this.setState({
-			student: {...student}
+			student: { ...student }
 		});
 	}
 
-	async editStudentDataInput(){
-		const {show} = this.state;
+	async editStudentDataInput() {
+		const { show } = this.state;
 
 		await this.props.editStudentData(this.state.student);
 
@@ -58,7 +62,7 @@ class StudentList extends Component {
 
 		this.setState({
 			show: !show
-		})
+		});
 	}
 
 	render() {
@@ -102,19 +106,26 @@ class StudentList extends Component {
 					</thead>
 					<tbody>{students}</tbody>
 				</table>
-				{show ? <EditStudent studentObj={student} editStudentDataInput={this.editStudentDataInput} editModalInputs={this.handleModalInputs} showEditModal={this.showEditModal} /> : ""}
+				{show ? (
+					<EditStudent
+						studentObj={student}
+						editStudentDataInput={this.editStudentDataInput}
+						editModalInputs={this.handleModalInputs}
+						showEditModal={this.showEditModal}
+					/>
+				) : (
+					""
+				)}
 			</div>
 		);
 	}
 }
 
 function mapStateToProps(state) {
-	return {
-		studentList: state.studentListReducer.studentList
-	};
+	return { studentList: state.studentListReducer.studentList, average: state.averageReducer.average };
 }
 
 export default connect(
 	mapStateToProps,
-	{ getStudentList, deleteStudent, editStudentData, clearInput }
+	{ getStudentList, deleteStudent, editStudentData, clearInput, gradeAverage }
 )(StudentList);
