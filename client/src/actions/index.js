@@ -1,6 +1,5 @@
 import types from "./types";
 import axios from "axios";
-//import dummyData from "../dummy_data";
 
 export function incrementCount(count) {
 	return {
@@ -58,11 +57,28 @@ export function deleteStudent(id) {
 }
 
 export function editStudentData(student) {
-
-	const response = axios.put("/api/edit_student_data", {student});
+	const response = axios.put("/api/edit_student_data", { student });
 
 	return {
 		type: types.EDIT_STUDENT,
 		payload: response
+	};
+}
+
+export function gradeAverage(students) {
+	let totalGrades = null;
+
+	students.map(currentStudent => {
+		totalGrades += currentStudent.grade_value;
+
+		return totalGrades;
+	});
+
+	const totalAverage = totalGrades / students.length;
+	const average = totalAverage.toFixed(2);
+
+	return {
+		type: types.GRADE_AVERAGE,
+		payload: average
 	};
 }
