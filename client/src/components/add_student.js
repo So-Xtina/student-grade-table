@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getStudentList, addStudent, updateInput, clearInput, gradeAverage } from "../actions";
+import { lettersValidation, numLetValidation, numbersValidation } from "./input_validation";
 
 class AddStudent extends Component {
 	constructor(props) {
@@ -46,6 +47,10 @@ class AddStudent extends Component {
 		const { name, value } = event.target;
 
 		this.props.updateInput(name, value);
+
+		lettersValidation(value);
+		numbersValidation(value);
+		numLetValidation(value);
 	}
 
 	clearInput() {

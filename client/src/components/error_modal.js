@@ -13,7 +13,8 @@ class Modal extends Component {
 							<h4 className="modal-title">Error Message</h4>
 						</div>
 						<div className="modal-body">
-							<p>Data Error!</p>
+							<p>{this.props.message}</p>
+							<p>{this.props.errorMessage}</p>
 						</div>
 						<div className="modal-footer">
 							<button type="button" className="btn btn-default" data-dismiss="modal">

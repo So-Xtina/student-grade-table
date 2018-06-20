@@ -2,15 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getStudentList, deleteStudent, editStudentData, clearInput, gradeAverage } from "../actions";
 import EditStudent from "./edit_student";
+import { lettersValidation, numLetValidation, numbersValidation } from "./input_validation";
 
 class StudentList extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			show: false,
-			student: null
-		};
+		this.state = { show: false, student: null, editModalError: false, hasError: false };
 
 		//calls the function when the page loads;
 		this.getServerData();
@@ -55,14 +53,33 @@ class StudentList extends Component {
 
 	async editStudentDataInput() {
 		const { show } = this.state;
+		const { student } = this.state;
 
-		await this.props.editStudentData(this.state.student);
+		let hasNoErrors = [];
+		for (var studentKey in student) {
+			if (studentKey === "student_name") {
+				hasNoErrors.push(lettersValidation(student[studentKey]));
+			} else if (studentKey === "class_name") {
+				hasNoErrors.push(numLetValidation(student[studentKey]));
+			} else if (studentKey === "grade_value") {
+				hasNoErrors.push(numbersValidation(student[studentKey]));
+			}
+		}
+		debugger;
 
-		this.getServerData();
+		if (hasNoErrors.indexOf(false) !== -1) {
+			this.setState({ editModalError: true, hasError: true });
+		} else {
+			await this.props.editStudentData(this.state.student);
 
-		this.setState({
-			show: !show
-		});
+			this.getServerData();
+
+			this.setState({
+				show: !show,
+				editModalError: false,
+				hasError: false
+			});
+		}
 	}
 
 	render() {
@@ -112,6 +129,8 @@ class StudentList extends Component {
 						editStudentDataInput={this.editStudentDataInput}
 						editModalInputs={this.handleModalInputs}
 						showEditModal={this.showEditModal}
+						displayErrors={this.state.editModalError}
+						hasError={this.state.hasError}
 					/>
 				) : (
 					""
