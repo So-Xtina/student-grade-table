@@ -8,7 +8,13 @@ class StudentList extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { show: false, student: null, editModalError: false, hasError: false };
+		this.state = {
+			show: false,
+			student: null,
+			editModalErrorStudent: false,
+			editModalErrorClass: false,
+			editModalErrorGrade: false
+		};
 
 		//calls the function when the page loads;
 		this.getServerData();
@@ -55,29 +61,39 @@ class StudentList extends Component {
 		const { show } = this.state;
 		const { student } = this.state;
 
-		let hasNoErrors = [];
+		let inputErrors = {};
+		console.log("this is the edit", student);
+
 		for (var studentKey in student) {
 			if (studentKey === "student_name") {
-				hasNoErrors.push(lettersValidation(student[studentKey]));
-			} else if (studentKey === "class_name") {
-				hasNoErrors.push(numLetValidation(student[studentKey]));
-			} else if (studentKey === "grade_value") {
-				hasNoErrors.push(numbersValidation(student[studentKey]));
+				inputErrors[studentKey] = lettersValidation(student[studentKey]);
+			}
+			if (studentKey === "class_name") {
+				inputErrors[studentKey] = numLetValidation(student[studentKey]);
+			}
+			if (studentKey === "grade_value") {
+				inputErrors[studentKey] = numbersValidation(student[studentKey]);
 			}
 		}
+		console.log("inputErrors object for errors on these input fields", inputErrors);
+
 		debugger;
-
-		if (hasNoErrors.indexOf(false) !== -1) {
-			this.setState({ editModalError: true, hasError: true });
+		if (Object.values(inputErrors).indexOf(true) !== -1) {
+			debugger;
+			this.setState({
+				editModalErrorStudent: inputErrors["student_name"],
+				editModalErrorClass: inputErrors["class_name"],
+				editModalErrorGrade: inputErrors["grade_value"]
+			});
 		} else {
+			debugger;
 			await this.props.editStudentData(this.state.student);
-
 			this.getServerData();
-
 			this.setState({
 				show: !show,
-				editModalError: false,
-				hasError: false
+				editModalErrorStudent: false,
+				editModalErrorClass: false,
+				editModalErrorGrade: false
 			});
 		}
 	}
@@ -129,7 +145,9 @@ class StudentList extends Component {
 						editStudentDataInput={this.editStudentDataInput}
 						editModalInputs={this.handleModalInputs}
 						showEditModal={this.showEditModal}
-						displayErrors={this.state.editModalError}
+						displayErrStudent={this.state.editModalErrorStudent}
+						displayErrClass={this.state.editModalErrorClass}
+						displayErrGrade={this.state.editModalErrorGrade}
 						hasError={this.state.hasError}
 					/>
 				) : (
