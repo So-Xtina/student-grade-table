@@ -8,7 +8,9 @@ class EditStudent extends Component {
 
 	render() {
 		const { student_name, class_name, grade_value, id } = this.props.studentObj;
-		const { displayErrors, hasError } = this.props;
+		const { displayErrStudent, displayErrClass, displayErrGrade, hasError } = this.props;
+
+		console.log("props", displayErrStudent, displayErrClass, displayErrGrade, hasError);
 
 		return (
 			<div className="editModal" role="dialog">
@@ -31,7 +33,7 @@ class EditStudent extends Component {
 									<label htmlFor="inputStudentName3" className="col-sm-2 control-label">
 										Student Name:
 									</label>
-									<div className={hasError ? "col-sm-9 has-error" : "col-sm-9 has-success"}>
+									<div className={displayErrStudent ? "col-sm-9 has-error" : "col-sm-9 has-primary"}>
 										<input
 											onChange={this.props.editModalInputs}
 											ref={id}
@@ -42,7 +44,7 @@ class EditStudent extends Component {
 											name="student_name"
 											placeholder="Student Name"
 										/>
-										<span className={displayErrors ? "" : "hideErrMessage"}>
+										<span className={displayErrStudent ? "" : "hideErrMessage"}>
 											Not a valid input, must contain letters up to 2-50 characters long.
 										</span>
 									</div>
@@ -51,18 +53,18 @@ class EditStudent extends Component {
 									<label htmlFor="inputStudentCourse3" className="col-sm-2 control-label">
 										Student Course:
 									</label>
-									<div className={hasError ? "col-sm-9 has-error" : "col-sm-9 has-success"}>
+									<div className={displayErrClass ? "col-sm-9 has-error" : "col-sm-9 has-primary"}>
 										<input
 											onChange={this.props.editModalInputs}
 											ref={id}
 											value={class_name}
 											type="text"
-											className={hasError ? "form-control has-error" : "form-control has-success"}
+											className="form-control"
 											id="inputStudentCourse3"
 											name="class_name"
 											placeholder="Student Course"
 										/>
-										<span className={displayErrors ? "" : "hideErrMessage"}>
+										<span className={displayErrClass ? "" : "hideErrMessage"}>
 											Not a valid input, must contain alphanumeric characters from 2-50 characters
 											long for class name.
 										</span>
@@ -72,19 +74,19 @@ class EditStudent extends Component {
 									<label htmlFor="inputStudentGrade3" className="col-sm-2 control-label">
 										Student Grade:
 									</label>
-									<div className={hasError ? "col-sm-9 has-error" : "col-sm-9 has-success"}>
+									<div className={displayErrGrade ? "col-sm-9 has-error" : "col-sm-9 has-primary"}>
 										<input
 											onChange={this.props.editModalInputs}
 											ref={id}
 											value={grade_value}
 											type="text"
-											className={hasError ? "form-control has-error" : "form-control has-success"}
+											className="form-control"
 											id="inputStudentGrade3"
 											name="grade_value"
 											placeholder="Student Grade"
 										/>
-										<span className={displayErrors ? "" : "hideErrMessage"}>
-											Not a valid input, must contain only numbers that are 3-4 characters long
+										<span className={displayErrGrade ? "" : "hideErrMessage"}>
+											Not a valid input, must contain only numbers that are 1-4 characters long
 											for the grade value.
 										</span>
 									</div>

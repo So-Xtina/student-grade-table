@@ -13,6 +13,8 @@ class AddStudent extends Component {
 			grade_value: ""
 		};
 
+		this.state = { displayErrStudent: false, displayErrClass: false, displayErrGrade: false };
+
 		this.getServerData = this.getServerData.bind(this);
 		this.handleAddItem = this.handleAddItem.bind(this);
 		this.updateInput = this.updateInput.bind(this);
@@ -36,31 +38,56 @@ class AddStudent extends Component {
 			grade_value
 		};
 
-		await this.props.addStudent(this.student);
+		let inputErrors = {};
 
-		this.getServerData();
+		for (var studentKey in this.student) {
+			if (studentKey === "student_name") {
+				inputErrors[studentKey] = lettersValidation(this.student[studentKey]);
+			}
+			if (studentKey === "class_name") {
+				inputErrors[studentKey] = numLetValidation(this.student[studentKey]);
+			}
+			if (studentKey === "grade_value") {
+				inputErrors[studentKey] = numbersValidation(this.student[studentKey]);
+			}
+		}
 
-		this.clearInput();
+		if (Object.values(inputErrors).indexOf(true) !== -1) {
+			this.setState({
+				displayErrStudent: inputErrors["student_name"],
+				displayErrClass: inputErrors["class_name"],
+				displayErrGrade: inputErrors["grade_value"]
+			});
+		} else {
+			await this.props.addStudent(this.student);
+
+			this.getServerData();
+
+			this.clearInput();
+		}
 	}
 
 	updateInput(event) {
 		const { name, value } = event.target;
 
 		this.props.updateInput(name, value);
-
-		lettersValidation(value);
-		numbersValidation(value);
-		numLetValidation(value);
 	}
 
 	clearInput() {
 		for (let key in this.student) {
 			this.props.clearInput(key);
 		}
+
+		this.setState({
+			displayErrStudent: false,
+			displayErrClass: false,
+			displayErrGrade: false
+		});
 	}
 
 	render() {
 		const { student_name, class_name, grade_value } = this.props;
+		const { displayErrStudent, displayErrClass, displayErrGrade } = this.state;
 
 		const style = {
 			fontSize: "24px"
@@ -69,7 +96,11 @@ class AddStudent extends Component {
 		return (
 			<div className="student-add-form col-md-3 col-lg-3 pull-right">
 				<h4>Add Student</h4>
-				<div className="input-group form-group">
+				<div
+					className={
+						displayErrStudent ? "input-group form-group has-error" : "input-group form-group has-primary"
+					}
+				>
 					<span className="input-group-addon">
 						<span className="glyphicon glyphicon-user" />
 					</span>
@@ -82,8 +113,15 @@ class AddStudent extends Component {
 						id="studentName"
 						placeholder="Student Name"
 					/>
+					<span className={displayErrStudent ? "" : "hideErrMessage"}>
+						Not a valid input, must contain letters up to 2-50 characters long.
+					</span>
 				</div>
-				<div className="input-group form-group">
+				<div
+					className={
+						displayErrClass ? "input-group form-group has-error" : "input-group form-group has-primary"
+					}
+				>
 					<span className="input-group-addon">
 						<span className="glyphicon glyphicon-list-alt" />
 					</span>
@@ -96,8 +134,16 @@ class AddStudent extends Component {
 						id="course"
 						placeholder="Student Course"
 					/>
+					<span className={displayErrClass ? "" : "hideErrMessage"}>
+						Not a valid input, must contain alphanumeric characters from 2-50 characters long for class
+						name.
+					</span>
 				</div>
-				<div className="input-group form-group">
+				<div
+					className={
+						displayErrGrade ? "input-group form-group has-error" : "input-group form-group has-primary"
+					}
+				>
 					<span className="input-group-addon">
 						<span className="glyphicon glyphicon-education" />
 					</span>
@@ -110,6 +156,9 @@ class AddStudent extends Component {
 						id="studentGrade"
 						placeholder="Student Grade"
 					/>
+					<span className={displayErrGrade ? "" : "hideErrMessage"}>
+						Not a valid input, must contain only numbers that are 1-4 characters long for the grade value.
+					</span>
 				</div>
 				<button onClick={() => this.handleAddItem()} type="button" className="btn btn-success btn-md addBtn">
 					<i className="fa fa-spinner fa-pulse hide addSpinner" style={style} />Add
