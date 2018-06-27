@@ -15,18 +15,12 @@ class AddStudent extends Component {
 
 		this.state = { displayErrStudent: false, displayErrClass: false, displayErrGrade: false };
 
+		this.getServerData();
+
 		this.getServerData = this.getServerData.bind(this);
 		this.handleAddItem = this.handleAddItem.bind(this);
 		this.updateInput = this.updateInput.bind(this);
 		this.clearInput = this.clearInput.bind(this);
-	}
-
-	async getServerData() {
-		await this.props.getStudentList();
-
-		const { studentList } = this.props;
-
-		this.props.gradeAverage(studentList);
 	}
 
 	async handleAddItem() {
@@ -73,6 +67,14 @@ class AddStudent extends Component {
 		this.props.updateInput(name, value);
 	}
 
+	async getServerData() {
+		await this.props.getStudentList();
+
+		const { studentList } = this.props;
+
+		this.props.gradeAverage(studentList);
+	}
+
 	clearInput() {
 		for (let key in this.student) {
 			this.props.clearInput(key);
@@ -88,10 +90,6 @@ class AddStudent extends Component {
 	render() {
 		const { student_name, class_name, grade_value } = this.props;
 		const { displayErrStudent, displayErrClass, displayErrGrade } = this.state;
-
-		const style = {
-			fontSize: "24px"
-		};
 
 		return (
 			<div className="student-add-form col-md-3 col-lg-3 pull-right">
@@ -113,10 +111,10 @@ class AddStudent extends Component {
 						id="studentName"
 						placeholder="Student Name"
 					/>
-					<span className={displayErrStudent ? "" : "hideErrMessage"}>
-						Not a valid input, must contain letters up to 2-50 characters long.
-					</span>
 				</div>
+				<span className={displayErrStudent ? "" : "hideErrMessage"}>
+					Not a valid input, must contain letters up to 2-50 characters long.
+				</span>
 				<div
 					className={
 						displayErrClass ? "input-group form-group has-error" : "input-group form-group has-primary"
@@ -134,11 +132,10 @@ class AddStudent extends Component {
 						id="course"
 						placeholder="Student Course"
 					/>
-					<span className={displayErrClass ? "" : "hideErrMessage"}>
-						Not a valid input, must contain alphanumeric characters from 2-50 characters long for class
-						name.
-					</span>
 				</div>
+				<span className={displayErrClass ? "" : "hideErrMessage"}>
+					Not a valid input, must contain alphanumeric characters from 2-50 characters long for class name.
+				</span>
 				<div
 					className={
 						displayErrGrade ? "input-group form-group has-error" : "input-group form-group has-primary"
@@ -152,16 +149,17 @@ class AddStudent extends Component {
 						value={grade_value}
 						type="text"
 						className="form-control"
-						name="grade_value"
+						name="number"
 						id="studentGrade"
 						placeholder="Student Grade"
 					/>
-					<span className={displayErrGrade ? "" : "hideErrMessage"}>
-						Not a valid input, must contain only numbers that are 1-4 characters long for the grade value.
-					</span>
 				</div>
+				<span className={displayErrGrade ? "" : "hideErrMessage"}>
+					Not a valid input, must contain only numbers that are 1-4 characters long for the grade value.
+				</span>
+				<br />
 				<button onClick={() => this.handleAddItem()} type="button" className="btn btn-success btn-md addBtn">
-					<i className="fa fa-spinner fa-pulse hide addSpinner" style={style} />Add
+					Add
 				</button>
 				<button onClick={() => this.clearInput()} type="button" className="btn btn-danger btn-md cancelBtn">
 					Cancel
@@ -171,7 +169,7 @@ class AddStudent extends Component {
 					type="button"
 					className="btn btn-primary btn-md dataServerBtn"
 				>
-					<i className="fa fa-spinner fa-pulse hide dataSpinner" style={style} />Get Data
+					Reload Student Data
 				</button>
 			</div>
 		);
