@@ -8,9 +8,7 @@ class EditStudent extends Component {
 
 	render() {
 		const { student_name, class_name, grade_value, id } = this.props.studentObj;
-		const { displayErrStudent, displayErrClass, displayErrGrade, hasError } = this.props;
-
-		console.log("props", displayErrStudent, displayErrClass, displayErrGrade, hasError);
+		const { displayErrStudent, displayErrClass, displayErrGrade } = this.props;
 
 		return (
 			<div className="editModal" role="dialog">
@@ -29,68 +27,80 @@ class EditStudent extends Component {
 						</div>
 						<div className="modal-body">
 							<form className="form-horizontal">
-								<div className="form-group">
-									<label htmlFor="inputStudentName3" className="col-sm-2 control-label">
-										Student Name:
-									</label>
-									<div className={displayErrStudent ? "col-sm-9 has-error" : "col-sm-9 has-primary"}>
-										<input
-											onChange={this.props.editModalInputs}
-											ref={id}
-											value={student_name}
-											type="text"
-											className="form-control"
-											id="inputStudentName3"
-											name="student_name"
-											placeholder="Student Name"
-										/>
-										<span className={displayErrStudent ? "" : "hideErrMessage"}>
-											Not a valid input, must contain letters up to 2-50 characters long.
-										</span>
-									</div>
+								<div
+									className={
+										displayErrStudent
+											? "input-group form-group col-sm-12 has-error"
+											: "input-group form-group col-sm-12 has-primary"
+									}
+								>
+									<span className="input-group-addon">
+										<span className="glyphicon glyphicon-user" />
+									</span>
+									<input
+										onChange={this.props.editModalInputs}
+										ref={id}
+										value={student_name}
+										type="text"
+										className="form-control"
+										id="inputStudentName3"
+										name="student_name"
+										placeholder="Student Name"
+									/>
 								</div>
-								<div className="form-group">
-									<label htmlFor="inputStudentCourse3" className="col-sm-2 control-label">
-										Student Course:
-									</label>
-									<div className={displayErrClass ? "col-sm-9 has-error" : "col-sm-9 has-primary"}>
-										<input
-											onChange={this.props.editModalInputs}
-											ref={id}
-											value={class_name}
-											type="text"
-											className="form-control"
-											id="inputStudentCourse3"
-											name="class_name"
-											placeholder="Student Course"
-										/>
-										<span className={displayErrClass ? "" : "hideErrMessage"}>
-											Not a valid input, must contain alphanumeric characters from 2-50 characters
-											long for class name.
-										</span>
-									</div>
+								<span className={displayErrStudent ? "" : "hideErrMessage"}>
+									Not a valid input, must contain letters up to 2-50 characters long.
+								</span>
+								<div
+									className={
+										displayErrClass
+											? "input-group form-group col-sm-12 has-error"
+											: "input-group form-group col-sm-12 has-primary"
+									}
+								>
+									<span className="input-group-addon">
+										<span className="glyphicon glyphicon-list-alt" />
+									</span>
+									<input
+										onChange={this.props.editModalInputs}
+										ref={id}
+										value={class_name}
+										type="text"
+										className="form-control"
+										id="inputStudentCourse3"
+										name="class_name"
+										placeholder="Student Course"
+									/>
 								</div>
-								<div className="form-group">
-									<label htmlFor="inputStudentGrade3" className="col-sm-2 control-label">
-										Student Grade:
-									</label>
-									<div className={displayErrGrade ? "col-sm-9 has-error" : "col-sm-9 has-primary"}>
-										<input
-											onChange={this.props.editModalInputs}
-											ref={id}
-											value={grade_value}
-											type="text"
-											className="form-control"
-											id="inputStudentGrade3"
-											name="grade_value"
-											placeholder="Student Grade"
-										/>
-										<span className={displayErrGrade ? "" : "hideErrMessage"}>
-											Not a valid input, must contain only numbers that are 1-4 characters long
-											for the grade value.
-										</span>
-									</div>
+								<span className={displayErrClass ? "" : "hideErrMessage"}>
+									Not a valid input, must contain alphanumeric characters from 2-50 characters long
+									for class name.
+								</span>
+								<div
+									className={
+										displayErrGrade
+											? "input-group form-group col-sm-12 has-error"
+											: "input-group form-group col-sm-12 has-primary"
+									}
+								>
+									<span className="input-group-addon">
+										<span className="glyphicon glyphicon-education" />
+									</span>
+									<input
+										onChange={this.props.editModalInputs}
+										ref={id}
+										value={grade_value}
+										type="number"
+										className="form-control"
+										id="inputStudentGrade3"
+										name="grade_value"
+										placeholder="Student Grade"
+									/>
 								</div>
+								<span className={displayErrGrade ? "" : "hideErrMessage"}>
+									Not a valid input, must contain only numbers that are 1-4 characters long for the
+									grade value.
+								</span>
 							</form>
 						</div>
 						<div className="modal-footer">

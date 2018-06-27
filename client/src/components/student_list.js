@@ -17,25 +17,11 @@ class StudentList extends Component {
 		};
 
 		//calls the function when the page loads;
-		this.getServerData();
+		// this.getServerData();
 		this.handleDeleteItem = this.handleDeleteStudent.bind(this);
 		this.handleModalInputs = this.handleModalInputs.bind(this);
 		this.showEditModal = this.showEditModal.bind(this);
 		this.editStudentDataInput = this.editStudentDataInput.bind(this);
-	}
-
-	async getServerData() {
-		await this.props.getStudentList();
-
-		const { studentList } = this.props;
-
-		this.props.gradeAverage(studentList);
-	}
-
-	async handleDeleteStudent(id) {
-		await this.props.deleteStudent(id);
-
-		this.getServerData();
 	}
 
 	showEditModal(student) {
@@ -47,7 +33,11 @@ class StudentList extends Component {
 		});
 	}
 
-	handleModalInputs(event) {
+	componentDidUpdate() {
+		this.props.gradeAverage(this.props.studentList);
+	}
+
+	async handleModalInputs(event) {
 		const { value, name } = event.target;
 		const { student } = this.state;
 		student[name] = value;
@@ -57,12 +47,15 @@ class StudentList extends Component {
 		});
 	}
 
+	async getServerData() {
+		await this.props.getStudentList();
+	}
+
 	async editStudentDataInput() {
 		const { show } = this.state;
 		const { student } = this.state;
 
 		let inputErrors = {};
-		console.log("this is the edit", student);
 
 		for (var studentKey in student) {
 			if (studentKey === "student_name") {
@@ -75,18 +68,14 @@ class StudentList extends Component {
 				inputErrors[studentKey] = numbersValidation(student[studentKey]);
 			}
 		}
-		console.log("inputErrors object for errors on these input fields", inputErrors);
 
-		debugger;
 		if (Object.values(inputErrors).indexOf(true) !== -1) {
-			debugger;
 			this.setState({
 				editModalErrorStudent: inputErrors["student_name"],
 				editModalErrorClass: inputErrors["class_name"],
 				editModalErrorGrade: inputErrors["grade_value"]
 			});
 		} else {
-			debugger;
 			await this.props.editStudentData(this.state.student);
 			this.getServerData();
 			this.setState({
@@ -96,6 +85,12 @@ class StudentList extends Component {
 				editModalErrorGrade: false
 			});
 		}
+	}
+
+	async handleDeleteStudent(id) {
+		await this.props.deleteStudent(id);
+
+		this.getServerData();
 	}
 
 	render() {

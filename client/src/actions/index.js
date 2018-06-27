@@ -69,7 +69,7 @@ export function gradeAverage(students) {
 	let totalGrades = null;
 
 	students.map(currentStudent => {
-		totalGrades += currentStudent.grade_value;
+		totalGrades += parseInt(currentStudent.grade_value, 10);
 
 		return totalGrades;
 	});
