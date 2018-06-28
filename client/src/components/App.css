@@ -51,6 +51,19 @@
 	margin: 5%;
 }
 
+/***********Delete Modal****************/
+.deleteModal {
+	position: absolute;
+	height: 50%;
+	width: 50%;
+	top: 0;
+	left: 0;
+	transform: translate(50%, -50%);
+	z-index: 1050;
+	display: block;
+	outline: 0;
+}
+
 /***********Screen Loader***************/
 .loader,
 .loader:before,

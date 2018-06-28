@@ -147,9 +147,9 @@ class AddStudent extends Component {
 					<input
 						onChange={this.updateInput}
 						value={grade_value}
-						type="text"
+						type="number"
 						className="form-control"
-						name="number"
+						name="grade_value"
 						id="studentGrade"
 						placeholder="Student Grade"
 					/>

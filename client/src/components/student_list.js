@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getStudentList, deleteStudent, editStudentData, clearInput, gradeAverage } from "../actions";
 import EditStudent from "./edit_student";
+import DeleteStudent from "./delete_modal";
 import { lettersValidation, numLetValidation, numbersValidation } from "./input_validation";
 
 class StudentList extends Component {
@@ -13,14 +14,14 @@ class StudentList extends Component {
 			student: null,
 			editModalErrorStudent: false,
 			editModalErrorClass: false,
-			editModalErrorGrade: false
+			editModalErrorGrade: false,
+			showDelete: false
 		};
 
-		//calls the function when the page loads;
-		// this.getServerData();
-		this.handleDeleteItem = this.handleDeleteStudent.bind(this);
+		this.handleDeleteStudent = this.handleDeleteStudent.bind(this);
 		this.handleModalInputs = this.handleModalInputs.bind(this);
 		this.showEditModal = this.showEditModal.bind(this);
+		this.showDeleteModal = this.showDeleteModal.bind(this);
 		this.editStudentDataInput = this.editStudentDataInput.bind(this);
 	}
 
@@ -29,6 +30,15 @@ class StudentList extends Component {
 
 		this.setState({
 			show: !show,
+			student
+		});
+	}
+
+	showDeleteModal(student) {
+		const { showDelete } = this.state;
+
+		this.setState({
+			showDelete: !showDelete,
 			student
 		});
 	}
@@ -87,15 +97,22 @@ class StudentList extends Component {
 		}
 	}
 
-	async handleDeleteStudent(id) {
-		await this.props.deleteStudent(id);
+	async handleDeleteStudent() {
+		const { showDelete } = this.state;
+		const { student } = this.state;
+
+		await this.props.deleteStudent(student.id);
 
 		this.getServerData();
+
+		this.setState({
+			showDelete: !showDelete
+		});
 	}
 
 	render() {
 		const { studentList } = this.props;
-		const { show, student } = this.state;
+		const { show, student, showDelete } = this.state;
 
 		const students = studentList.map((student, index) => {
 			return (
@@ -111,7 +128,7 @@ class StudentList extends Component {
 						Edit
 					</td>
 					<td
-						onClick={() => this.handleDeleteStudent(student.id)}
+						onClick={() => this.showDeleteModal(student)}
 						type="button"
 						className="btn btn-danger btn-sm deleteBtn"
 					>
@@ -144,6 +161,15 @@ class StudentList extends Component {
 						displayErrClass={this.state.editModalErrorClass}
 						displayErrGrade={this.state.editModalErrorGrade}
 						hasError={this.state.hasError}
+					/>
+				) : (
+					""
+				)}
+				{showDelete ? (
+					<DeleteStudent
+						studentObj={student}
+						showDeleteModal={this.showDeleteModal}
+						deleteStudentId={this.handleDeleteStudent}
 					/>
 				) : (
 					""
