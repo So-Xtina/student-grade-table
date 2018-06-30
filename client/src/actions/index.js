@@ -9,21 +9,29 @@ export function incrementCount(count) {
 }
 
 export function getStudentList() {
-	const response = axios.get("/api/get_student_data");
+	try {
+		const response = axios.get("/api/get_student_data");
 
-	return {
-		type: types.GET_STUDENT_LIST,
-		payload: response
-	};
+		return {
+			type: types.GET_STUDENT_LIST,
+			payload: response
+		};
+	} catch (err) {
+		console.log("Get Student Data Error: ", err);
+	}
 }
 
 export function addStudent(student) {
-	const response = axios.post("/api/add_student", student);
+	try {
+		const response = axios.post("/api/add_student", student);
 
-	return {
-		type: types.ADD_STUDENT,
-		payload: response
-	};
+		return {
+			type: types.ADD_STUDENT,
+			payload: response
+		};
+	} catch (err) {
+		console.log("Student Add Error: ", err);
+	}
 }
 
 export function updateInput(name, value) {
@@ -44,25 +52,33 @@ export function clearInput(name) {
 }
 
 export function deleteStudent(id) {
-	const response = axios.delete("/api/delete_student", {
-		params: {
-			id
-		}
-	});
+	try {
+		const response = axios.delete("/api/delete_student", {
+			params: {
+				id
+			}
+		});
 
-	return {
-		type: types.DELETE_STUDENT,
-		payload: response
-	};
+		return {
+			type: types.DELETE_STUDENT,
+			payload: response
+		};
+	} catch (err) {
+		console.log("Delete Student Error: ", err);
+	}
 }
 
 export function editStudentData(student) {
-	const response = axios.put("/api/edit_student_data", { student });
+	try {
+		const response = axios.put("/api/edit_student_data", { student });
 
-	return {
-		type: types.EDIT_STUDENT,
-		payload: response
-	};
+		return {
+			type: types.EDIT_STUDENT,
+			payload: response
+		};
+	} catch (err) {
+		console.log("Edit Student Error: ", err);
+	}
 }
 
 export function gradeAverage(students) {
@@ -80,5 +96,14 @@ export function gradeAverage(students) {
 	return {
 		type: types.GRADE_AVERAGE,
 		payload: average
+	};
+}
+
+export function requestSent() {
+	return {
+		type: types.REQUEST_SENT,
+		payload: {
+			requestInProgress: true
+		}
 	};
 }

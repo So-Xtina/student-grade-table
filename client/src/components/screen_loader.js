@@ -1,18 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
 
-class Loader extends Component {
-	constructor(props) {
-		super(props);
-	}
-
-	render() {
-		return (
-			<div>
-				<div className="loader" />
-			</div>
-		);
-	}
+function Loader(props) {
+	return (
+		<div className="loader-container col-md-9 col-xs-12 pull-left">
+			<div className="loader" />
+		</div>
+	);
 }
 
 export default Loader;

@@ -65,6 +65,10 @@
 }
 
 /***********Screen Loader***************/
+.loader-container {
+	margin-top: 5%;
+}
+
 .loader,
 .loader:before,
 .loader:after {
@@ -76,10 +80,10 @@
 	animation: circleLoader 1.8s infinite ease-in-out;
 }
 .loader {
+	left: 50%;
 	color: #32a2a2;
 	opacity: 0.8;
 	font-size: 10px;
-	margin: 60% auto;
 	position: relative;
 	animation-delay: -0.16s;
 }

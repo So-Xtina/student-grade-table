@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getStudentList, deleteStudent, editStudentData, clearInput, gradeAverage } from "../actions";
+import { getStudentList, deleteStudent, editStudentData, clearInput, gradeAverage, requestSent } from "../actions";
 import EditStudent from "./edit_student";
 import DeleteStudent from "./delete_modal";
 import { lettersValidation, numLetValidation, numbersValidation } from "./input_validation";
+import Loader from "./screen_loader";
 
 class StudentList extends Component {
 	constructor(props) {
@@ -47,7 +48,7 @@ class StudentList extends Component {
 		this.props.gradeAverage(this.props.studentList);
 	}
 
-	async handleModalInputs(event) {
+	handleModalInputs(event) {
 		const { value, name } = event.target;
 		const { student } = this.state;
 		student[name] = value;
@@ -58,6 +59,7 @@ class StudentList extends Component {
 	}
 
 	async getServerData() {
+		await this.props.requestSent();
 		await this.props.getStudentList();
 	}
 
@@ -111,7 +113,7 @@ class StudentList extends Component {
 	}
 
 	render() {
-		const { studentList } = this.props;
+		const { requestInProgress, studentList } = this.props;
 		const { show, student, showDelete } = this.state;
 
 		const students = studentList.map((student, index) => {
@@ -138,6 +140,9 @@ class StudentList extends Component {
 			);
 		});
 
+		if (requestInProgress) {
+			return <Loader />;
+		}
 		return (
 			<div className="student-list-container col-xs-12 col-sm-9">
 				<table className="student-list page-header media-heading table">
@@ -149,7 +154,7 @@ class StudentList extends Component {
 							<th>Operations</th>
 						</tr>
 					</thead>
-					<tbody>{students}</tbody>
+					<tbody>{requestInProgress ? null : students}</tbody>
 				</table>
 				{show ? (
 					<EditStudent
@@ -180,10 +185,14 @@ class StudentList extends Component {
 }
 
 function mapStateToProps(state) {
-	return { studentList: state.studentListReducer.studentList, average: state.averageReducer.average };
+	return {
+		studentList: state.studentListReducer.studentList,
+		average: state.averageReducer.average,
+		requestInProgress: state.studentListReducer.requestInProgress
+	};
 }
 
 export default connect(
 	mapStateToProps,
-	{ getStudentList, deleteStudent, editStudentData, clearInput, gradeAverage }
+	{ getStudentList, deleteStudent, editStudentData, clearInput, gradeAverage, requestSent }
 )(StudentList);

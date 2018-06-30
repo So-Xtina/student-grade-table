@@ -9,7 +9,8 @@ export function lettersValidation(value) {
 }
 
 export function numbersValidation(value) {
-	const numbers = /^[0-9 ,.]{2,5}$/;
+	// const numbers = /^[0-9 ,.]{2,4}$/;
+	const numbers = /^[0-9]{2,3}.[0-9]{2}$/;
 
 	if (value === "" || !numbers.test(value)) {
 		return true;
