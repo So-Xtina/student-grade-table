@@ -6,5 +6,6 @@ export default {
 	CLEAR_INPUT: "clear_input",
 	DELETE_STUDENT: "delete_student",
 	EDIT_STUDENT: "edit_student",
-	GRADE_AVERAGE: "grade_average"
+	GRADE_AVERAGE: "grade_average",
+	REQUEST_SENT: "request_sent"
 };

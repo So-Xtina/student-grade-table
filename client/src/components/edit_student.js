@@ -73,8 +73,8 @@ class EditStudent extends Component {
 									/>
 								</div>
 								<span className={displayErrClass ? "" : "hideErrMessage"}>
-									Not a valid input, must contain alphanumeric characters from 2-50 characters long
-									for class name.
+									Not a valid input, must contain letters and/or numbers from 2-50 characters long for
+									class name.
 								</span>
 								<div
 									className={
@@ -98,8 +98,8 @@ class EditStudent extends Component {
 									/>
 								</div>
 								<span className={displayErrGrade ? "" : "hideErrMessage"}>
-									Not a valid input, must contain only numbers that are 1-4 characters long for the
-									grade value.
+									Not a valid input, grade value must contain numbers of 2-3 characters long with a 2
+									decimal place.
 								</span>
 							</form>
 						</div>

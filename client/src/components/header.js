@@ -5,18 +5,21 @@ import { gradeAverage } from "../actions";
 class Header extends Component {
 	render() {
 		const { average } = this.props;
+
 		return (
 			<div className="col-xs-12 col-md-12 page-header media-heading screen">
 				<h1 className="visible-sm visible-md visible-lg row">
 					Student Grade Table
 					<small className="pull-right">
-						Grade Average : <span className="avgGrade label label-default">{average}</span>
+						Grade Average :
+						<span className="avgGrade label label-default">{isNaN(average) ? "0" : average}</span>
 					</small>
 				</h1>
 				<h3 className="visible-xs row">
 					Student Grade Table
 					<small className="pull-right">
-						Grade Average : <span className="avgGrade label label-default">{average}</span>
+						Grade Average :
+						<span className="avgGrade label label-default">{isNaN(average) ? "0" : average}</span>
 					</small>
 				</h3>
 			</div>
