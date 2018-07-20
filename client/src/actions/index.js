@@ -11,13 +11,12 @@ export function incrementCount(count) {
 export function getStudentList() {
 	try {
 		const response = axios.get("/api/get_student_data");
-
 		return {
 			type: types.GET_STUDENT_LIST,
 			payload: response
 		};
 	} catch (err) {
-		console.log("Get Student Data Error: ", err);
+		console.error("Get Student Data Error: ", err);
 	}
 }
 
@@ -30,7 +29,7 @@ export function addStudent(student) {
 			payload: response
 		};
 	} catch (err) {
-		console.log("Student Add Error: ", err);
+		console.error("Student Add Error: ", err);
 	}
 }
 
@@ -64,7 +63,7 @@ export function deleteStudent(id) {
 			payload: response
 		};
 	} catch (err) {
-		console.log("Delete Student Error: ", err);
+		console.error("Delete Student Error: ", err);
 	}
 }
 
@@ -77,7 +76,7 @@ export function editStudentData(student) {
 			payload: response
 		};
 	} catch (err) {
-		console.log("Edit Student Error: ", err);
+		console.error("Edit Student Error: ", err);
 	}
 }
 
