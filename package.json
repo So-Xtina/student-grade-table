@@ -1,11 +1,12 @@
 {
 	"name": "student-grade-table",
 	"version": "1.0.0",
-	"description": "creating a student grade table using ReactJS, ReduxJS, NodeJS, and PHP",
+	"description": "creating a student grade table using ReactJS, ReduxJS, and NodeJS",
 	"main": "webserver.js",
 	"dependencies": {
 		"body-parser": "^1.18.3",
 		"express": "^4.16.3",
+		"express-validator": "^5.2.0",
 		"mysql": "^2.15.0"
 	},
 	"devDependencies": {
