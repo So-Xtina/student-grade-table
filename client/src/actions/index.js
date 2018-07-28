@@ -9,28 +9,21 @@ export function incrementCount(count) {
 }
 
 export function getStudentList() {
-	try {
-		const response = axios.get("/api/get_student_data");
-		return {
-			type: types.GET_STUDENT_LIST,
-			payload: response
-		};
-	} catch (err) {
-		console.error("Get Student Data Error: ", err);
-	}
+	const response = axios.get("/api/get_student_data");
+
+	return {
+		type: types.GET_STUDENT_LIST,
+		payload: response
+	};
 }
 
 export function addStudent(student) {
-	try {
-		const response = axios.post("/api/add_student", student);
+	const response = axios.post("/api/add_student", student);
 
-		return {
-			type: types.ADD_STUDENT,
-			payload: response
-		};
-	} catch (err) {
-		console.error("Student Add Error: ", err);
-	}
+	return {
+		type: types.ADD_STUDENT,
+		payload: response
+	};
 }
 
 export function updateInput(name, value) {
@@ -51,33 +44,25 @@ export function clearInput(name) {
 }
 
 export function deleteStudent(id) {
-	try {
-		const response = axios.delete("/api/delete_student", {
-			params: {
-				id
-			}
-		});
+	const response = axios.delete("/api/delete_student", {
+		params: {
+			id
+		}
+	});
 
-		return {
-			type: types.DELETE_STUDENT,
-			payload: response
-		};
-	} catch (err) {
-		console.error("Delete Student Error: ", err);
-	}
+	return {
+		type: types.DELETE_STUDENT,
+		payload: response
+	};
 }
 
 export function editStudentData(student) {
-	try {
-		const response = axios.put("/api/edit_student_data", { student });
+	const response = axios.put("/api/edit_student_data", { student });
 
-		return {
-			type: types.EDIT_STUDENT,
-			payload: response
-		};
-	} catch (err) {
-		console.error("Edit Student Error: ", err);
-	}
+	return {
+		type: types.EDIT_STUDENT,
+		payload: response
+	};
 }
 
 export function gradeAverage(students) {
