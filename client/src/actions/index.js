@@ -57,7 +57,7 @@ export function deleteStudent(id) {
 }
 
 export function editStudentData(student) {
-	const response = axios.put("/api/edit_student_data", { student });
+	const response = axios.put("/api/edit_student_data", student);
 
 	return {
 		type: types.EDIT_STUDENT,

@@ -11,14 +11,14 @@ class Header extends Component {
 				<h1 className="visible-sm visible-md visible-lg row">
 					Student Grade Table
 					<small className="pull-right">
-						Grade Average :
+						Grade Average:
 						<span className="avgGrade label label-default">{isNaN(average) ? "0" : average}</span>
 					</small>
 				</h1>
 				<h3 className="visible-xs row">
 					Student Grade Table
 					<small className="pull-right">
-						Grade Average :
+						Grade Average:
 						<span className="avgGrade label label-default">{isNaN(average) ? "0" : average}</span>
 					</small>
 				</h3>

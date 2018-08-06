@@ -13,7 +13,7 @@ module.exports = (webserver, mysql, database) => {
 				.isLength({ min: 1 })
 				.isDecimal({ force_decimal: false, decimal_digits: "1,3", locale: "en-US" }),
 			check("student_name")
-				.isLength({ min: 1, max: 100 })
+				.isLength({ min: 1, max: 50 })
 				.matches(letters)
 		],
 		(req, res) => {

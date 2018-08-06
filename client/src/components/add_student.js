@@ -112,9 +112,7 @@ class AddStudent extends Component {
 						placeholder="Student Name"
 					/>
 				</div>
-				<span className={displayErrStudent ? "" : "hideErrMessage"}>
-					Not a valid input, must contain letters up to 2-50 characters long.
-				</span>
+				<span className={displayErrStudent ? "" : "hideErrMessage"}>Please enter full name.</span>
 				<div
 					className={
 						displayErrClass ? "input-group form-group has-error" : "input-group form-group has-primary"
@@ -133,9 +131,7 @@ class AddStudent extends Component {
 						placeholder="Student Course"
 					/>
 				</div>
-				<span className={displayErrClass ? "" : "hideErrMessage"}>
-					Not a valid input, must contain letters and/or numbers from 2-50 characters long for class name.
-				</span>
+				<span className={displayErrClass ? "" : "hideErrMessage"}>Please enter a class name.</span>
 				<div
 					className={
 						displayErrGrade ? "input-group form-group has-error" : "input-group form-group has-primary"
@@ -155,7 +151,7 @@ class AddStudent extends Component {
 					/>
 				</div>
 				<span className={displayErrGrade ? "" : "hideErrMessage"}>
-					Not a valid input, grade value must contain numbers of 2-3 characters long with a 2 decimal place.
+					Please enter a grade percentage, Example: 70.00
 				</span>
 				<br />
 				<button onClick={() => this.handleAddItem()} type="button" className="btn btn-success btn-md addBtn">
