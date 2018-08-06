@@ -144,7 +144,7 @@ class StudentList extends Component {
 			return <Loader />;
 		}
 		return (
-			<div className="student-list-container col-xs-12 col-sm-9">
+			<div className="student-list-container col-xs-12 col-md-9">
 				<table className="student-list page-header media-heading table">
 					<thead>
 						<tr>

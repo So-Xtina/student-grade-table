@@ -49,7 +49,7 @@ class EditStudent extends Component {
 									/>
 								</div>
 								<span className={displayErrStudent ? "" : "hideErrMessage"}>
-									Not a valid input, must contain letters up to 2-50 characters long.
+									Please enter a full name.
 								</span>
 								<div
 									className={
@@ -73,8 +73,7 @@ class EditStudent extends Component {
 									/>
 								</div>
 								<span className={displayErrClass ? "" : "hideErrMessage"}>
-									Not a valid input, must contain letters and/or numbers from 2-50 characters long for
-									class name.
+									Please enter a class name.
 								</span>
 								<div
 									className={
@@ -98,8 +97,7 @@ class EditStudent extends Component {
 									/>
 								</div>
 								<span className={displayErrGrade ? "" : "hideErrMessage"}>
-									Not a valid input, grade value must contain numbers of 2-3 characters long with a 2
-									decimal place.
+									Please enter a grade percentage, Example: 70.00
 								</span>
 							</form>
 						</div>
