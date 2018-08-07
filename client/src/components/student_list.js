@@ -51,7 +51,9 @@ class StudentList extends Component {
 	handleModalInputs(event) {
 		const { value, name } = event.target;
 		const { student } = this.state;
-		student[name] = value;
+		var val = value.trim();
+
+		student[name] = val;
 
 		this.setState({
 			student: { ...student }
@@ -68,6 +70,8 @@ class StudentList extends Component {
 		const { student } = this.state;
 
 		let inputErrors = {};
+
+		// const checkChar = /^[A-Za-z]+$/;
 
 		for (var studentKey in student) {
 			if (studentKey === "student_name") {
