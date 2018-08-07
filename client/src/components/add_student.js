@@ -64,7 +64,9 @@ class AddStudent extends Component {
 	updateInput(event) {
 		const { name, value } = event.target;
 
-		this.props.updateInput(name, value);
+		var val = value.trim();
+
+		this.props.updateInput(name, val);
 	}
 
 	async getServerData() {
@@ -112,7 +114,7 @@ class AddStudent extends Component {
 						placeholder="Student Name"
 					/>
 				</div>
-				<span className={displayErrStudent ? "" : "hideErrMessage"}>Please enter full name.</span>
+				<span className={displayErrStudent ? "" : "hideErrMessage"}>Please enter a full name.</span>
 				<div
 					className={
 						displayErrClass ? "input-group form-group has-error" : "input-group form-group has-primary"
@@ -151,7 +153,7 @@ class AddStudent extends Component {
 					/>
 				</div>
 				<span className={displayErrGrade ? "" : "hideErrMessage"}>
-					Please enter a grade percentage, Example: 70.00
+					Please enter a grade percentage. ( Example: 70.00 )
 				</span>
 				<br />
 				<button onClick={() => this.handleAddItem()} type="button" className="btn btn-success btn-md addBtn">

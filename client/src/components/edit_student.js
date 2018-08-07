@@ -97,7 +97,7 @@ class EditStudent extends Component {
 									/>
 								</div>
 								<span className={displayErrGrade ? "" : "hideErrMessage"}>
-									Please enter a grade percentage, Example: 70.00
+									Please enter a grade percentage. ( Example: 70.00 )
 								</span>
 							</form>
 						</div>
