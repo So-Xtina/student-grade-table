@@ -1,28 +1,113 @@
-.App {
-  text-align: center;
+/* .App {
+	text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+/*********ADDITIONAL STYLING***********/
+
+/*************Error**************/
+
+.hideErrMessage {
+	display: none;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.form-group {
+	margin-top: 15px;
 }
 
-.App-title {
-  font-size: 1.5em;
+/*************Buttons*****************/
+.student-add-form {
+	text-align: center;
 }
 
-.App-intro {
-  font-size: large;
+.cancelBtn,
+.dataServerBtn,
+.addBtn {
+	margin: 1.5%;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.editBtn,
+.deleteBtn {
+	margin: 2%;
+}
+
+/*************Edit Modal**************/
+.editModal {
+	position: absolute;
+	height: 50%;
+	width: 50%;
+	top: 0;
+	left: 0;
+	transform: translate(50%, -50%);
+	z-index: 1050;
+	display: block;
+	outline: 0;
+}
+
+.form-control::placeholder {
+	text-align: center;
+}
+
+.modal-body {
+	margin: 5%;
+}
+
+/***********Delete Modal****************/
+.deleteModal {
+	position: absolute;
+	height: 50%;
+	width: 50%;
+	top: 0;
+	left: 0;
+	transform: translate(50%, -50%);
+	z-index: 1050;
+	display: block;
+	outline: 0;
+}
+
+/***********Screen Loader***************/
+.loader-container {
+	margin-top: 5%;
+}
+
+.loader,
+.loader:before,
+.loader:after {
+	border-radius: 6%;
+	width: 2.5em;
+	height: 2.5em;
+	z-index: 10;
+	animation-fill-mode: both;
+	animation: circleLoader 1.8s infinite ease-in-out;
+}
+.loader {
+	left: 50%;
+	color: #32a2a2;
+	opacity: 0.8;
+	font-size: 10px;
+	position: relative;
+	animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+	content: "";
+	position: absolute;
+	top: 0;
+}
+.loader:before {
+	left: -3.5em;
+	animation-delay: -0.32s;
+}
+.loader:after {
+	left: 3.5em;
+}
+
+@keyframes circleLoader {
+	0%,
+	80%,
+	100% {
+		box-shadow: 0 2.5em 0 -1.3em;
+	}
+	40% {
+		box-shadow: 0 2.5em 0 0;
+	}
 }
