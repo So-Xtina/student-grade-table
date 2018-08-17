@@ -11,7 +11,7 @@ module.exports = (webserver, mysql, database) => {
 				.matches(numberLetters),
 			check("grade_value")
 				.isLength({ min: 1 })
-				.isDecimal({ force_decimal: false, decimal_digits: "1,3", locale: "en-US" }),
+				.isDecimal({ force_decimal: false, decimal_digits: "1,2", locale: "en-US" }),
 			check("student_name")
 				.isLength({ min: 1, max: 50 })
 				.matches(letters)
