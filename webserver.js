@@ -3,8 +3,10 @@ const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const webserver = express();
 const { credentials } = require("./config/mysqlCredentials");
+const crontask = require("./cron_job/cron_job");
 const database = mysql.createConnection(credentials);
 
+crontask(mysql, database);
 webserver.use(bodyParser.urlencoded({ extended: false }));
 webserver.use(bodyParser.json());
 

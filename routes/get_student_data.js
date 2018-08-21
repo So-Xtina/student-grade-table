@@ -31,7 +31,6 @@ module.exports = (webserver, mysql, database) => {
 			} else {
 				output.errors = err;
 			}
-
 			res.json(output);
 		});
 	});
