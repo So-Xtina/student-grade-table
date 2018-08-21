@@ -4,6 +4,11 @@
 
 /*********ADDITIONAL STYLING***********/
 
+/***********Student List***************/
+.student-list-container {
+	position: relative;
+}
+
 /*************Error**************/
 
 .hideErrMessage {
@@ -27,12 +32,12 @@
 
 .editBtn,
 .deleteBtn {
-	margin: 2%;
+	margin: 1.5%;
 }
 
 /*************Edit Modal**************/
 .editModal {
-	position: absolute;
+	position: absolute !important;
 	height: 50%;
 	width: 50%;
 	top: 0;
@@ -51,6 +56,12 @@
 	margin: 5%;
 }
 
+@media screen and (max-width: 425px) {
+	.editModal {
+		transform: translate(0, 0);
+	}
+}
+
 /***********Delete Modal****************/
 .deleteModal {
 	position: absolute;
@@ -62,6 +73,11 @@
 	z-index: 1050;
 	display: block;
 	outline: 0;
+}
+
+/*************Grade Average**************/
+.avgGrade {
+	margin: 3%;
 }
 
 /***********Screen Loader***************/

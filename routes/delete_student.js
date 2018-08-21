@@ -1,5 +1,12 @@
+const { check, validationResult } = require("express-validator/check");
+
 module.exports = (webserver, mysql, database) => {
-	webserver.delete("/api/delete_student", (req, res) => {
+	webserver.delete("/api/delete_student", [check("id").isInt()], (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
+		}
+
 		const output = {
 			success: false,
 			errors: [],

@@ -11,7 +11,7 @@ class EditStudent extends Component {
 		const { displayErrStudent, displayErrClass, displayErrGrade } = this.props;
 
 		return (
-			<div className="editModal" role="dialog">
+			<div className="editModal col-md-6 col-xs-12" role="dialog">
 				<div className="modal-dialog">
 					<div className="modal-content">
 						<div className="modal-header">

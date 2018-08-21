@@ -126,19 +126,23 @@ class StudentList extends Component {
 					<td>{student.student_name}</td>
 					<td>{student.class_name}</td>
 					<td>{student.grade_value}</td>
-					<td
-						onClick={() => this.showEditModal(student)}
-						type="button"
-						className="btn btn-success btn-sm editBtn"
-					>
-						Edit
-					</td>
-					<td
-						onClick={() => this.showDeleteModal(student)}
-						type="button"
-						className="btn btn-danger btn-sm deleteBtn"
-					>
-						Delete
+					<td>
+						<div>
+							<button
+								onClick={() => this.showEditModal(student)}
+								type="button"
+								className="btn btn-success btn-md editBtn"
+							>
+								Edit
+							</button>
+							<button
+								onClick={() => this.showDeleteModal(student)}
+								type="button"
+								className="btn btn-danger btn-md deleteBtn"
+							>
+								Delete
+							</button>
+						</div>
 					</td>
 				</tr>
 			);
