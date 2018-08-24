@@ -1,7 +1,7 @@
 const CronJob = require("cron").CronJob;
 
 module.exports = function(mysql, database) {
-	const job = new CronJob("* */30 * * * *", function() {
+	const job = new CronJob("*/30 * * * *", function() {
 		let clear = `
         TRUNCATE TABLE 
         student_grade_table.grades`;
@@ -19,7 +19,6 @@ module.exports = function(mysql, database) {
 				student_name: "Hilary Compton",
 				grade_value: 75
 			},
-
 			{
 				id: 2,
 				class_name: "Business Calculus",

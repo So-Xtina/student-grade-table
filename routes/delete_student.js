@@ -1,12 +1,5 @@
-const { check, validationResult } = require("express-validator/check");
-
 module.exports = (webserver, mysql, database) => {
-	webserver.delete("/api/delete_student", [check("id").isInt()], (req, res) => {
-		const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			return res.status(422).json({ errors: errors.array() });
-		}
-
+	webserver.delete("/api/delete_student", (req, res) => {
 		const output = {
 			success: false,
 			errors: [],
@@ -15,24 +8,29 @@ module.exports = (webserver, mysql, database) => {
 
 		let id = req.query.id;
 
-		let query = `
-            DELETE FROM grades 
-            WHERE id = ? 
-        `;
+		if (!isNaN(id)) {
+			let query = `
+            	DELETE FROM grades 
+           		WHERE id = ? 
+        	`;
 
-		let inserts = [id];
+			let inserts = [id];
 
-		let mysqlQuery = mysql.format(query, inserts);
+			let mysqlQuery = mysql.format(query, inserts);
 
-		database.query(mysqlQuery, (err, data, fields) => {
-			if (!err) {
-				output.success = true;
-				output.message = "Student has been deleted successfully";
-			} else {
-				output.errors = err;
-			}
+			database.query(mysqlQuery, (err, data, fields) => {
+				if (!err) {
+					output.success = true;
+					output.message = "Student has been deleted successfully";
+				} else {
+					output.errors = err;
+				}
 
+				res.json(output);
+			});
+		} else {
+			output.message = "Not a valid student id";
 			res.json(output);
-		});
+		}
 	});
 };
